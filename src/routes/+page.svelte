@@ -4,6 +4,8 @@
 
 	let result: number = 0;
 
+	let color = 'green';
+
 	// on change:
 	$: onChange(carbs, kcal);
 
@@ -14,21 +16,38 @@
 		const carbs_per_100kcal = (carbs / kcal) * 100;
 		// round 4 digits
 		result = Math.round(carbs_per_100kcal * 10000) / 10000;
+
+		if (result > 4) {
+			color = 'red';
+		} else if (result > 3.5) {
+			color = '#ff8d00';
+		} else if (result > 3) {
+			color = '#ffcc00';
+		} else {
+			color = 'green';
+		}
 	}
 </script>
 
 <div class="container">
 	<div class="inputs">
-		<input type="number" placeholder="kcal" bind:value={kcal} />
-		<input type="number" placeholder="carbs" bind:value={carbs} />
+		<label for="kcal">Calories in kcal</label>
+		<input id="kcal" type="number" placeholder="calories in kcal" bind:value={kcal} />
+		<label for="carbs">Carbs in g</label>
+		<input id="carbs" type="number" placeholder="carbs in g" bind:value={carbs} />
 	</div>
 
-	<p>Carbs per 100 kcal: <b>{result} kcal</b></p>
+	<p>Carbs per 100 kcal: <b style="color: {color}">{result} g</b></p>
 </div>
 
 <style>
 	.container {
 		font-family: sans-serif;
+	}
+
+	label {
+		font-weight: semibold;
+		margin-bottom: 0.5rem;
 	}
 
 	.inputs {
