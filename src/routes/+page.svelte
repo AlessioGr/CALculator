@@ -47,7 +47,11 @@
 
 	label {
 		font-weight: semibold;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.2rem;
+		font-size: 0.9rem;
+	}
+	#kcal {
+		margin-bottom: 1.5rem;
 	}
 
 	.inputs {
